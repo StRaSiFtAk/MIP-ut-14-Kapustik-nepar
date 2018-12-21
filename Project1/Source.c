@@ -176,12 +176,18 @@ void vypis_bludisko() {
 			sklad1[polica1][stlpec1] = 'O';
 		}
 	}
-	printf("riesenie: \n");
-	for (r = 0; r < dlzka; r++) {
-		for (s = 0; s < sirka; s++) {
-			printf("%c", sklad1[r][s]);
+
+	if (riesenie == 1)
+		return 0;
+	else {
+		sklad1[0][1] = 'O';
+		printf("riesenie: \n");
+		for (r = 0; r < dlzka; r++) {
+			for (s = 0; s < sirka; s++) {
+				printf("%c", sklad1[r][s]);
+			}
+			printf("\n");
 		}
-		printf("\n");
 	}
 }
 
@@ -221,6 +227,10 @@ int main(void) {
 	while (gets(&nacitanie) != NULL) {
 		nacitaj_bludisko();
 		while (polica != dlzka - 1 && stlpec != sirka - 1) {
+			if (riesenie == 1) {
+				printf("Bludisko nema riesenie\n");
+				break;
+			}
 			hladaj_cestu();
 		}
 		vypis_sklad();
