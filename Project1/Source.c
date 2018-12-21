@@ -190,6 +190,10 @@ void vypis_bludisko() {
 
 void nacitaj_bludisko() {
 	int i, j;
+	if (nacitanie[1] != '.') {
+		printf("Bludisko nema vstup\n");
+		riesenie = 1;
+	}
 	sirka = strlen(nacitanie);
 	for (i = 0; i < sirka; i++) {
 		sklad[0][i] = nacitanie[i];
