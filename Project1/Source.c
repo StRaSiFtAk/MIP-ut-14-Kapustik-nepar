@@ -6,6 +6,20 @@
 int sirka, dlzka, dlzka1, polica = 0, stlpec = 0;
 char nacitanie[201], sklad[201][201];
 
+void nulovanie() {
+	int m, n;
+	sirka = 0;
+	dlzka = 0;
+	dlzka1 = 0;
+	polica = 0;
+	stlpec = 0;
+	for (m = 0; m < 201; m++) {
+		for (n = 0; n < 201; n++) {
+			sklad[m][n] = '\0';
+			nacitanie[m] = '\0';
+		}
+	}
+}
 
 void hladaj_cestu() {
 	int i, pohyb = 0;
@@ -37,13 +51,14 @@ void hladaj_cestu() {
 
 void vypis_sklad() {
 	int i, j;
-
-	for (j = 0; j <= 4; j++) {
+	printf("Vypis: \n");
+	for (j = 0; j <= dlzka; j++) {
 		for (i = 0; i < sirka; i++) {
 			printf("%c", sklad[j][i]);
 		}
 		printf("\n");
 	}
+
 
 }
 void nacitaj_bludisko() {
@@ -70,11 +85,11 @@ void nacitaj_bludisko() {
 
 int main(void) {
 	int i, j;
-
 	while (gets(&nacitanie) != NULL) {
 		nacitaj_bludisko();
-		hladaj_cestu();
+		//hladaj_cestu (); 
 		vypis_sklad();
+		nulovanie();
 	}
 	printf("\n");
 	return 0;
