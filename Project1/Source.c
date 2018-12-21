@@ -1,10 +1,10 @@
-// projekt 2.c -- Denis Vladim�r B�lik, 12.4.2018 08:41
+﻿// projekt 2.c -- Denis Vladimír Bílik, 12.4.2018 08:41
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
-int sirka, dlzka, dlzka1, polica = 0, stlpec = 0;
-char nacitanie[201], sklad[201][201],sklad1[201][201];
+int sirka, dlzka, dlzka1, polica = 0, stlpec = 0, navrat = 1, riesenie = 0, pocitadlo1, pocitadlo2;
+char nacitanie[201], sklad[201][201], sklad1[201][201], ulozene_pozicie_polica[400000], ulozene_pozicie_stlpec[400000], kroky[400000], cesta[400000];
 
 void nulovanie() {
 	int m, n;
@@ -23,29 +23,103 @@ void nulovanie() {
 }
 
 void hladaj_cestu() {
-	int i, pohyb = 0;
-	polica = 0;
-	stlpec = 1;
-	sklad[0][1] = '0';
-	while (polica != dlzka - 1 && stlpec != sirka - 1) {
-		pohyb = 0;
-		if (sklad[polica - 1][stlpec] == '.' && pohyb == 0) {
-			polica--;
-			pohyb = 1;
-		}
-		if (sklad[polica + 1][stlpec] == '.' && pohyb == 0) {
+	int d = 0, p = 0, l = 0, h = 0, smery = 0, moznost = 0, i=0;
+	while (polica == dlzka - 1 && stlpec == sirka - 1) {          //hladá dokiaľ nepríde do ciela
+		break;
+	}
+	
+	sklad[0][1] = 'O';
+	if (sklad[polica + 1][stlpec] == '.') {          
+		d = 1;
+		smery++;
+	}
+	if (sklad[polica][stlpec + 1] == '.') {
+		p = 1;
+		smery++;
+	}
+	if (sklad[polica][stlpec - 1] == '.') {
+		l = 1;
+		smery++;
+	}
+	if (sklad[polica - 1][stlpec] == '.') {
+		h = 1;
+		smery++;
+	}
+	if (smery == 0) {
+		if (navrat > pocitadlo1)
+			riesenie = 1;
+		polica = ulozene_pozicie_polica[pocitadlo1 - navrat];
+		stlpec = ulozene_pozicie_stlpec[pocitadlo1 - navrat];
+		pocitadlo2 = kroky[pocitadlo1 - navrat];
+		navrat++;
+	}
+
+	if (smery == 1) {
+		if (d == 1) {
 			polica++;
-			pohyb = 1;
+			sklad[polica][stlpec] = 'O';
+			cesta[pocitadlo2] = 'd';
+			pocitadlo2++;
 		}
-		if (sklad[polica][stlpec + 1] == '.' && pohyb == 0) {
-			stlpec++;
-			pohyb = 1;
-		}
-		if (sklad[polica][stlpec - 1] == '.' && pohyb == 0) {
+		if (l == 1) {
 			stlpec--;
-			pohyb = 1;
+			sklad[polica][stlpec] = 'O';
+			cesta[pocitadlo2] = 'l';
+			pocitadlo2++;
 		}
-		sklad[polica][stlpec] = '0';
+		if (p == 1) {
+			stlpec++;
+			sklad[polica][stlpec] = 'O';
+			cesta[pocitadlo2] = 'p';
+			pocitadlo2++;
+		}
+		if (h == 1) {
+			polica--;
+			sklad[polica][stlpec] = 'O';
+			cesta[pocitadlo2] = 'h';
+			pocitadlo2++;
+		}
+	}
+	if (smery > 1) {
+		navrat = 1;
+		if (ulozene_pozicie_polica[pocitadlo1 - 1] == polica && ulozene_pozicie_stlpec[pocitadlo1 - 1] == stlpec)
+			i++;
+		else {
+			ulozene_pozicie_polica[pocitadlo1] = polica;
+			ulozene_pozicie_stlpec[pocitadlo1] = stlpec;
+			kroky[pocitadlo1] = pocitadlo2;
+			pocitadlo1++;
+		}
+	}
+	if (smery > 1) {
+		if (p == 1 && moznost == 0) {
+			stlpec++;
+			sklad[polica][stlpec] = 'O';
+			cesta[pocitadlo2] = 'p';
+			pocitadlo2++;
+			moznost++;
+		}
+		if (d == 1 && moznost == 0) {
+			polica++;
+			sklad[polica][stlpec] = 'O';
+			cesta[pocitadlo2] = 'd';
+			pocitadlo2++;
+			moznost++;
+		}
+		if (l == 1 && moznost == 0) {
+			stlpec--;
+			sklad[polica][stlpec] = 'O';
+			cesta[pocitadlo2] = 'l';
+			pocitadlo2++;
+			moznost++;
+		}
+		if (h == 1 && moznost == 0) {
+			polica--;
+			sklad[polica][stlpec] = 'O';
+			cesta[pocitadlo2] = 'h';
+			pocitadlo2++;
+			moznost++;
+		}
 	}
 }
 
