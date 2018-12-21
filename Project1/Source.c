@@ -3,7 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int sirka, dlzka, polica = 0, stlpec = 0;
+int sirka, dlzka, dlzka1, polica = 0, stlpec = 0;
 char nacitanie[201], sklad[201][201];
 
 
@@ -47,28 +47,23 @@ void vypis_sklad() {
 
 }
 void nacitaj_bludisko() {
-	int i = 0, j;
-	sirka = 0;
-	scanf("%s", &nacitanie);
-	scanf("\n");
+	int i, j;
 	sirka = strlen(nacitanie);
-	for (j = 0; j < sirka; j++) {
-		sklad[0][j] = nacitanie[j];
+	for (i = 0; i < sirka; i++) {
+		sklad[0][i] = nacitanie[i];
 	}
-	polica = 1;
-
-	while (scanf("%c", &sklad[polica][stlpec]) > 0) {
-		//printf("%c",sklad[polica][stlpec]);
-		stlpec++;
-		i++;
-		if (i == sirka) {
-			scanf("\n");
-			i = 0;
-			stlpec = 0;
-			polica++;
-		}
+	for (i = 0; i < 201; i++)
+		nacitanie[i] = '\0';
+	while (gets(&nacitanie) != NULL)
+	{
+		if (!strcmp(nacitanie, "----"))
+			break;
+		strcpy(&sklad[dlzka1][0], nacitanie);
+		for (i = 0; i < 201; i++)
+			nacitanie[i] = '\0';
+		dlzka1++;
 	}
-	dlzka = polica;
+	dlzka = dlzka1;
 }
 
 
@@ -76,9 +71,11 @@ void nacitaj_bludisko() {
 int main(void) {
 	int i, j;
 
-	nacitaj_bludisko();
-	hladaj_cestu();
-	vypis_sklad();
+	while (gets(&nacitanie) != NULL) {
+		nacitaj_bludisko();
+		hladaj_cestu();
+		vypis_sklad();
+	}
 	printf("\n");
 	return 0;
 }
