@@ -45,6 +45,10 @@ void hladaj_cestu() {
 	while (polica == dlzka - 1 && stlpec == sirka - 1) {
 		break;
 	}
+	if (sklad[dlzka1 - 1][sirka - 2] == '#') {
+		riesenie = 1;
+		printf("Bludisko nema koniec\n");
+	}
 
 	sklad[0][1] = '0';
 	//polica=0;
