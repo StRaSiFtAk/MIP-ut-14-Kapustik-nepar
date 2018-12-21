@@ -4,7 +4,7 @@
 #include <string.h>
 
 int sirka, dlzka, dlzka1, polica = 0, stlpec = 0;
-char nacitanie[201], sklad[201][201];
+char nacitanie[201], sklad[201][201],sklad1[201][201];
 
 void nulovanie() {
 	int m, n;
@@ -16,6 +16,7 @@ void nulovanie() {
 	for (m = 0; m < 201; m++) {
 		for (n = 0; n < 201; n++) {
 			sklad[m][n] = '\0';
+			sklad1[m][n] = '\0';
 			nacitanie[m] = '\0';
 		}
 	}
@@ -66,6 +67,7 @@ void nacitaj_bludisko() {
 	sirka = strlen(nacitanie);
 	for (i = 0; i < sirka; i++) {
 		sklad[0][i] = nacitanie[i];
+		sklad1[0][i] = nacitanie[i];
 	}
 	for (i = 0; i < 201; i++)
 		nacitanie[i] = '\0';
@@ -74,6 +76,7 @@ void nacitaj_bludisko() {
 		if (!strcmp(nacitanie, "----"))
 			break;
 		strcpy(&sklad[dlzka1][0], nacitanie);
+		strcpy(&sklad1[dlzka1][0], nacitanie);
 		for (i = 0; i < 201; i++)
 			nacitanie[i] = '\0';
 		dlzka1++;
