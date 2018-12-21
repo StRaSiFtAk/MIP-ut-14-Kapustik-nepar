@@ -152,22 +152,27 @@ void vypis_sklad() {
 
 void vypis_bludisko() {
 	int r, s, polica1 = 0, stlpec1 = 1, krok;
+	char smer;
 	for (krok = 0; krok < pocitadlo2; krok++) {
-		if (cesta[krok] == 'd') {
+		smer = cesta[krok];
+		switch (smer) {
+		case 'd':
 			polica1++;
 			sklad1[polica1][stlpec1] = 'O';
-		}
-		if (cesta[krok] == 'h') {
-			polica1--;
-			sklad1[polica1][stlpec1] = 'O';
-		}
-		if (cesta[krok] == 'l') {
-			stlpec1--;
-			sklad1[polica1][stlpec1] = 'O';
-		}
-		if (cesta[krok] == 'p') {
-			stlpec1++;
-			sklad1[polica1][stlpec1] = 'O';
+		case 'h':
+				polica1--;
+				sklad1[polica1][stlpec1] = 'O';
+			case 'l':
+				stlpec1--;
+				sklad1[polica1][stlpec1] = 'O';
+			case 'p':
+				stlpec1++;
+				sklad1[polica1][stlpec1] = 'O';
+			default:
+				riesenie = 1;
+				printf("\n Chyba riesenia\n");
+				break;
+
 		}
 	}
 
