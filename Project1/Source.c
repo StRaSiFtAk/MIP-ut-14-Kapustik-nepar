@@ -212,6 +212,10 @@ void nacitaj_bludisko() {
 	dlzka = dlzka1;
 }
 
+void pocet_krokov() {
+	printf("pocet krokov: %d\n", strlen(cesta));
+}
+
 
 
 int main(void) {
@@ -224,8 +228,10 @@ int main(void) {
 				break;
 			}
 			hladaj_cestu();
+
 		}
 		vypis_sklad();
+		pocet_krokov();
 		vypis_bludisko();
 
 		nulovanie();
