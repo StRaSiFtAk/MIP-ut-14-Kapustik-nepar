@@ -10,20 +10,11 @@ void nulovanie() {
 	int m, n;
 	polica = 0;
 	stlpec = 1;
-	//k= 0;
-	//l= 0;
 	pocitadlo1 = 0;
 	pocitadlo2 = 0;
-	//pocitadlo3= 0;
 	dlzka = 0;
 	dlzka1 = 1;
 	sirka = 0;
-	//sirka1=0;
-   // x= 0;
-	//y= 0;
-	//z= 0;
-   // w= 0;
-	//q= 0;
 	riesenie = 0;
 	for (m = 0; m < 201; m++) {
 		for (n = 0; n < 201; n++) {
@@ -40,6 +31,7 @@ void nulovanie() {
 	}
 }
 
+
 void hladaj_cestu() {
 	int d = 0, p = 0, l = 0, h = 0, smery = 0, moznost = 0, i = 0;
 	while (polica == dlzka - 1 && stlpec == sirka - 1) {
@@ -51,8 +43,6 @@ void hladaj_cestu() {
 	}
 
 	sklad[0][1] = '0';
-	//polica=0;
-	//stlpec=1;
 	if (sklad[polica + 1][stlpec] == '.') {
 		d = 1;
 		smery++;
@@ -194,8 +184,6 @@ void vypis_bludisko() {
 		}
 	}
 }
-
-
 
 
 void nacitaj_bludisko() {
